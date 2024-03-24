@@ -1,0 +1,5 @@
+int x = 5;
+int y = 3;
+print(x);
+boolean result = 4 == 3;
+print(result);
