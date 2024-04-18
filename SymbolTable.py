@@ -4,7 +4,7 @@ import Tokens
 from nltk import word_tokenize
 from collections import OrderedDict
 
-def printUnorderedSymoblTable(filename, isOrdered):
+def printSymoblTable(filename, isOrdered):
     refrence = 0
     identifiers = getIdentifiers(filename)
     if(isOrdered):
@@ -22,6 +22,48 @@ def printUnorderedSymoblTable(filename, isOrdered):
             space ='\t'
         print(i,'\t\t', identifiers[i-1],space, refrence, '\t\t',dataTypes[i-1],space,0,'\t\t', lineDec, '\t\t', linesRef)
         refrence += dataTypeMemorySpace[dataTypes[i-1]]
+
+def printHashSymbolTable(filename):
+    identifiers = getIdentifiers(filename)
+    # identifiers = ['frog', 'tree','hell', 'bird', 'bat', 'cat' ]
+    hashIndexes = calculateHashIndex(identifiers)
+    
+    # Create a dictionary to store identifiers by hash index
+    hash_table = {}
+    for i in range(len(identifiers)):
+        index = hashIndexes[i]
+        if index not in hash_table:
+            hash_table[index] = []
+        hash_table[index].append(identifiers[i])
+    
+    # Iterate over hash indexes and print identifiers
+    for index in range(len(identifiers)):
+        if index in hash_table:
+            print(f"{index} -->", end=" ")
+            # Get the list of identifiers at this hash index
+            identifier_list = hash_table[index]
+            # Determine whether we are at the last item in the list
+            is_last = len(identifier_list) - 1
+            
+            for i in range(len(identifier_list)):
+                identifier = identifier_list[i]
+                if i < is_last:
+                    print(f"{identifier} -->", end=" ")
+                else:
+                    print(f"{identifier}", end=" ")
+            print()
+        else:
+            print(index)
+
+
+
+def calculateHashIndex(identifiers):
+    hashIndexes = []
+    for identifier in identifiers:
+        hashIndex = (len(identifier) + ord(identifier[0])) % len(identifiers)
+        hashIndexes.append(hashIndex)
+    return hashIndexes
+
 
 def getLineDec(identifier, lines):
     for index, line in enumerate(lines):

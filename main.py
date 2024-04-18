@@ -13,8 +13,10 @@ if(len(errors) == 0):
     print('')
     print('--------------Printing sybmol table -------------\n')
     print('- Unordered Symbol table')
-    SymbolTable.printUnorderedSymoblTable(filename, False)
+    SymbolTable.printSymoblTable(filename, False)
     print('\n- Ordered Symbol table')
-    SymbolTable.printUnorderedSymoblTable(filename, True)
+    SymbolTable.printSymoblTable(filename, True)
+    print('\n- Hash Symbol table')
+    SymbolTable.printHashSymbolTable(filename)
     print('')
 
