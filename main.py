@@ -16,7 +16,10 @@ if(len(errors) == 0):
     SymbolTable.printSymoblTable(filename, False)
     print('\n- Ordered Symbol table')
     SymbolTable.printSymoblTable(filename, True)
+    
     print('\n- Hash Symbol table')
     SymbolTable.printHashSymbolTable(filename)
+    print('\n- Tree Structure Symbol table')
+    SymbolTable.printTreeStructureSymoblTabl(filename)
     print('')
 

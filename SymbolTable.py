@@ -3,6 +3,7 @@ import Lexer
 import Tokens
 from nltk import word_tokenize
 from collections import OrderedDict
+from TreeNode import *
 
 def printSymoblTable(filename, isOrdered):
     refrence = 0
@@ -25,7 +26,6 @@ def printSymoblTable(filename, isOrdered):
 
 def printHashSymbolTable(filename):
     identifiers = getIdentifiers(filename)
-    # identifiers = ['frog', 'tree','hell', 'bird', 'bat', 'cat' ]
     hashIndexes = calculateHashIndex(identifiers)
     
     # Create a dictionary to store identifiers by hash index
@@ -63,6 +63,23 @@ def calculateHashIndex(identifiers):
         hashIndex = (len(identifier) + ord(identifier[0])) % len(identifiers)
         hashIndexes.append(hashIndex)
     return hashIndexes
+
+
+def printTreeStructureSymoblTabl(filename):
+    identifiers = getIdentifiers(filename)
+    if len(identifiers) == 0:
+        print("The list of identifiers is empty.")
+        return
+    root = TreeNode(identifiers[0])
+
+    # Insert remaining identifiers into the tree
+    for identifier in identifiers[1:]:
+        insert(root, identifier)
+
+    # Print the tree structure
+    print('identifiers =', identifiers)
+    printTree(root)
+
 
 
 def getLineDec(identifier, lines):
