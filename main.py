@@ -4,6 +4,7 @@ import SymbolTable
 import FirstSet
 import GrammarParser
 import FollowSet
+import ParseTable
 
 filename = "hello.ota"
 Lexer.print_table(filename)
@@ -27,9 +28,9 @@ if(len(errors) == 0):
     print('')
     print('--------------Printing first set example -------------\n')
     grammar = """
-S -> XY
-X -> Yd|epsilon
-Y -> xc  
+S -> bXY
+X -> b|c
+Y -> b|epsilon
     """ 
     grammar_dict = GrammarParser.parse_grammar(grammar)
     print('Grammer example is:', grammar)
@@ -38,5 +39,9 @@ Y -> xc
     print('--------------Printing follow set example -------------\n')
     FollowSet.printFollowSets(grammar_dict)
     print('')
+    print('--------------Printing Parse table -------------\n')
+    terminals, parse_table = ParseTable.getTerminalsWithParseTable(grammar_dict)
+    # Print the parse table
+    ParseTable.print_parse_table(parse_table, terminals)
 
 
