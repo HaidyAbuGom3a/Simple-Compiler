@@ -1,6 +1,9 @@
 import Lexer
 from ErrorHandler import analyze_syntax
 import SymbolTable
+import FirstSet
+import GrammarParser
+import FollowSet
 
 filename = "hello.ota"
 Lexer.print_table(filename)
@@ -22,4 +25,18 @@ if(len(errors) == 0):
     print('\n- Tree Structure Symbol table')
     SymbolTable.printTreeStructureSymoblTabl(filename)
     print('')
+    print('--------------Printing first set example -------------\n')
+    grammar = """
+S -> XY
+X -> Yd|epsilon
+Y -> xc  
+    """ 
+    grammar_dict = GrammarParser.parse_grammar(grammar)
+    print('Grammer example is:', grammar)
+    FirstSet.printFirstSets(grammar_dict)
+    print('')
+    print('--------------Printing follow set example -------------\n')
+    FollowSet.printFollowSets(grammar_dict)
+    print('')
+
 

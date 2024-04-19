@@ -34,6 +34,8 @@ operation_pattern = rf'({identifier_pattern}\s*({math_operators_pattern})\s*{ide
 #condtition
 expression_pattern = rf'({operation_pattern}|{identifier_pattern}|{constant_pattern}|{condition_pattern})'
 
+#assignment:
+#dataType id = expression
 assignment_pattern = rf'(({data_types_pattern})\s+{identifier_pattern}\s*=\s*{expression_pattern})'
 
 #statement:
